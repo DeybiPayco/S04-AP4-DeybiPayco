@@ -1,0 +1,41 @@
+<div style="padding: 20px;">
+  <h2>Registro de Videojuegos</h2>
+
+  <div class="formulario">
+    <input type="text" [(ngModel)]="nuevoVideojuego.nombre" placeholder="Nombre del juego">
+    <input type="text" [(ngModel)]="nuevoVideojuego.plataforma" placeholder="Plataforma">
+    <input type="number" [(ngModel)]="nuevoVideojuego.anio" placeholder="Año">
+    
+    <button (click)="agregarVideojuego()">
+      {{ editando ? 'Actualizar' : 'Agregar Juego' }}
+    </button>
+  </div>
+
+  <hr>
+
+  <table border="1" *ngIf="listaVideojuegos.length > 0; else vacio">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Plataforma</th>
+        <th>Año</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let juego of listaVideojuegos">
+        <td>{{ juego.nombre }}</td>
+        <td>{{ juego.plataforma }}</td>
+        <td>{{ juego.anio }}</td>
+        <td>
+          <button (click)="seleccionar(juego)">Editar</button>
+          <button (click)="eliminar(juego.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #vacio>
+    <p>No hay videojuegos registrados aún.</p>
+  </ng-template>
+</div>
